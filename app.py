@@ -14,7 +14,8 @@ menu = [
     "6. Tomando Decisões (If/Else)",
     "7. Repetições (For e While)",
     "8. Funções (def)",
-    "9. Tratamento de Erros (Try/Except)"
+    "9. Tratamento de Erros (Try/Except)",
+    "10. Módulos e Bibliotecas (Import)"
 ]
 escolha = st.sidebar.radio("Navegação:", menu)
 
@@ -388,13 +389,63 @@ except ValueError:
     st.info("💡 **Dica de Ouro:** Usar `try` e `except` é o que diferencia um programa amador (que trava o tempo todo) de um programa profissional e seguro!")
 
     st.markdown("---")
-    st.subheader("🧠 Quiz Final!")
+    st.subheader("🧠 Quiz Rápido!")
     q9 = st.radio("Para que serve o bloco `except`?", ("Para tentar executar um código perigoso.", "Para executar algo SOMENTE quando um erro acontecer, evitando que o programa feche.", "Para encerrar o programa de propósito.", "Para acelerar o código."), index=None)
     if q9 == "Para executar algo SOMENTE quando um erro acontecer, evitando que o programa feche.":
-        st.success("Você acertou! Ele é a 'rede de segurança' do seu programa! 🎉")
-        st.balloons()
+        st.success("Você acertou! Ele é a 'rede de segurança' do seu programa!")
     elif q9 != None:
         st.error("Pense um pouco mais na tradução de 'Exceto' (se der erro).")
+
+elif escolha == "10. Módulos e Bibliotecas (Import)":
+    st.header("10. Módulos e Bibliotecas (`import`)")
+    st.write('''
+    Você sabia que não precisa programar tudo do zero? O Python possui um "arsenal" gigantesco de códigos prontos criados por outras pessoas que você pode usar de graça!
+    Para trazer essas ferramentas extras para o seu programa, usamos a palavra mágica **`import`**.
+    ''')
+
+    st.subheader("Exemplo: A Biblioteca Matemática")
+    st.write("O Python sabe somar e multiplicar, mas se você precisar calcular a raiz quadrada? Basta importar a biblioteca `math`!")
+    st.code('''
+import math # Trazendo a caixa de ferramentas de matemática
+
+raiz = math.sqrt(25) # sqrt = square root (raiz quadrada)
+print(raiz) # O resultado será 5.0
+    ''', language='python')
+
+    st.subheader("Exemplo: Sorteios com a biblioteca `random`")
+    st.write("Criar códigos que geram coisas aleatórias é muito difícil. Mas graças à biblioteca `random` (aleatório), podemos fazer sorteios em 2 linhas!")
+    st.code('''
+import random
+
+# Sorteando um número de 1 a 10:
+numero_da_sorte = random.randint(1, 10)
+print("Seu número da sorte é:", numero_da_sorte)
+
+# Sorteando um vencedor de uma lista:
+alunos = ["Ana", "Bruno", "Carlos", "Diana"]
+vencedor = random.choice(alunos)
+print("O grande vencedor do sorteio foi:", vencedor)
+    ''', language='python')
+
+    st.info("💡 **Curiosidade:** O próprio aplicativo que você está usando agora mesmo para ler este curso foi criado importando uma biblioteca famosa chamada `streamlit`!")
+
+    st.markdown("---")
+    st.subheader("🎯 Exercício Interativo!")
+    st.write("Clique no botão abaixo para testar a biblioteca `random` aqui mesmo e sortear um número de 1 a 100:")
+
+    import random # Importamos a biblioteca real aqui no código do aplicativo!
+    if st.button("Sortear Número!"):
+        sorteio = random.randint(1, 100)
+        st.success(f"O número sorteado foi: **{sorteio}**!")
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Final!")
+    q10 = st.radio("Qual é a palavra mágica que usamos para trazer bibliotecas e códigos prontos para dentro do nosso programa?", ("include", "bring", "import", "get"), index=None)
+    if q10 == "import":
+        st.success("Exatamente! Importar é o grande poder do Python! 🎈🎉")
+        st.balloons()
+    elif q10 != None:
+        st.error("Erro! Dê uma olhadinha lá no título desta aula.")
 
 st.sidebar.markdown("---")
 st.sidebar.info("Este aplicativo foi criado para ajudar você a entender os fundamentos do Python!")
