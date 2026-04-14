@@ -13,7 +13,8 @@ menu = [
     "5. Parênteses, Colchetes e Chaves",
     "6. Tomando Decisões (If/Else)",
     "7. Repetições (For e While)",
-    "8. Funções (def)"
+    "8. Funções (def)",
+    "9. Tratamento de Erros (Try/Except)"
 ]
 escolha = st.sidebar.radio("Navegação:", menu)
 
@@ -279,6 +280,48 @@ somar(50, 50)  # Vai mostrar "A soma deu: 100"
     Com as Funções, você acaba de concluir a base essencial da programação em Python.
     Você já tem o conhecimento necessário para começar a criar os seus próprios projetinhos!
     ''')
+
+elif escolha == "9. Tratamento de Erros (Try/Except)":
+    st.header("9. Tratamento de Erros (`try` e `except`)")
+    st.write('''
+    Você já notou que, às vezes, o Python mostra um erro gigante em vermelho na tela e o seu programa simplesmente fecha (crasha)?
+    Como bons programadores, precisamos **prever** que erros podem acontecer e ensinar o programa a lidar com eles de forma elegante, sem "quebrar" na cara do usuário.
+    ''')
+
+    st.subheader("O que é o Try e o Except?")
+    st.markdown('''
+    * **`try` (Tentar):** Você pede para o Python *tentar* executar um bloco de código perigoso (que pode dar erro).
+    * **`except` (Exceto/Se der erro):** Se o código der errado, o Python não trava! Ele pula para o bloco do Except e executa o que você mandar.
+    ''')
+
+    st.subheader("Exemplo Clássico: Divisão por Zero")
+    st.write("Na matemática, não podemos dividir um número por zero. Se você tentar fazer isso no Python, ele quebra. Veja como consertar:")
+
+    st.code('''
+# Tente executar isso:
+try:
+    numero = 10
+    divisor = 0
+    resultado = numero / divisor
+    print("O resultado é:", resultado)
+
+# Se der um erro de "Divisão por Zero", faça isso em vez de travar:
+except ZeroDivisionError:
+    print("Opa! Você tentou dividir por zero. Isso não é permitido na matemática!")
+    ''', language='python')
+
+    st.subheader("Outro Exemplo: Erro de Digitação do Usuário")
+    st.write("Imagine que você pede para a pessoa digitar a idade (um número), mas ela digita 'vinte' (um texto). O programa daria erro, mas com o Try/Except:")
+
+    st.code('''
+try:
+    idade = int(input("Digite sua idade em números: "))
+    print("Você tem", idade, "anos.")
+except ValueError:
+    print("Erro! Por favor, digite apenas números, não palavras.")
+    ''', language='python')
+
+    st.info("💡 **Dica de Ouro:** Usar `try` e `except` é o que diferencia um programa amador (que trava o tempo todo) de um programa profissional e seguro!")
 
 st.sidebar.markdown("---")
 st.sidebar.info("Este aplicativo foi criado para ajudar você a entender os fundamentos do Python!")
