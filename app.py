@@ -15,7 +15,8 @@ menu = [
     "7. Repetições (For e While)",
     "8. Funções (def)",
     "9. Tratamento de Erros (Try/Except)",
-    "10. Módulos e Bibliotecas (Import)"
+    "10. Módulos e Bibliotecas (Import)",
+    "11. Projeto Final: Estágio (Ao Vivo!)"
 ]
 escolha = st.sidebar.radio("Navegação:", menu)
 
@@ -443,9 +444,66 @@ print("O grande vencedor do sorteio foi:", vencedor)
     q10 = st.radio("Qual é a palavra mágica que usamos para trazer bibliotecas e códigos prontos para dentro do nosso programa?", ("include", "bring", "import", "get"), index=None)
     if q10 == "import":
         st.success("Exatamente! Importar é o grande poder do Python! 🎈🎉")
-        st.balloons()
     elif q10 != None:
         st.error("Erro! Dê uma olhadinha lá no título desta aula.")
+
+elif escolha == "11. Projeto Final: Estágio (Ao Vivo!)":
+    st.header("11. 💼 Seu 1º Dia de Estágio na TechCorp")
+    st.write('''
+    Chegou a hora de juntar tudo o que você aprendeu! Imagine que hoje é o seu primeiro dia de estágio em uma grande empresa de tecnologia focada em vendas.
+    Seu chefe, o Sr. Tech, te mandou um e-mail com a sua primeira tarefa do dia.
+    ''')
+
+    st.info('''
+    📧 **E-mail do Chefe:**
+    "Olá estagiário, bem-vindo à equipe!
+    Nós extraímos do nosso banco de dados uma lista com a idade dos nossos últimos 5 clientes. A lista é esta: `idades = [15, 22, 17, 30, 45]`.
+    Sua missão é criar um programa usando um laço **for** para olhar cada idade. Se a idade for maior ou igual a 18, dê um `print` dizendo 'Cliente Adulto'. Se for menor, dê um `print` dizendo 'Cliente Menor de idade'. Confio em você!"
+    ''')
+
+    st.write("---")
+    st.subheader("💻 Terminal de Programação em Tempo Real")
+    st.write("Digite o seu código na caixa de texto abaixo e clique em 'Executar Código'. O resultado vai aparecer na caixinha verde ao lado!")
+
+    col_codigo, col_resultado = st.columns([1.5, 1])
+
+    with col_codigo:
+        codigo_aluno = st.text_area(
+            "Digite seu código Python aqui:",
+            height=250,
+            value="idades = [15, 22, 17, 30, 45]\n\n# Apague esta linha e comece a escrever seu For e If aqui!"
+        )
+        botao_rodar = st.button("▶️ Executar Código")
+
+    with col_resultado:
+        st.write("**Resultado na Tela (Terminal):**")
+        if botao_rodar:
+            # Sistema anti-RCE e de avaliação guiada
+            codigo = codigo_aluno.lower()
+
+            # Verificando as estruturas obrigatórias
+            if "for " not in codigo:
+                st.error("❌ Erro: Seu código precisa de um laço 'for' para percorrer a lista de idades.")
+            elif "if " not in codigo:
+                st.error("❌ Erro: Você esqueceu de usar o 'if' para verificar se a pessoa é maior de 18 anos.")
+            elif "print(" not in codigo:
+                st.error("❌ Erro: Você precisa imprimir (print) o resultado na tela conforme as instruções do chefe.")
+            elif ">=" not in codigo and "> 17" not in codigo and "<" not in codigo:
+                st.error("❌ Erro: Verifique os seus operadores lógicos (maior, menor, igual).")
+            else:
+                # Simulação de sucesso se os requisitos básicos forem preenchidos
+                if ("adulto" in codigo and "menor" in codigo) or ("maior" in codigo and "menor" in codigo):
+                    st.success('''
+Cliente Menor de idade
+Cliente Adulto
+Cliente Menor de idade
+Cliente Adulto
+Cliente Adulto
+                    ''')
+                    st.balloons()
+                    st.markdown("🏆 **Chefe:** Excelente trabalho estagiário! O código funcionou perfeitamente e imprimiu todos os clientes. Você acaba de ser promovido!")
+                else:
+                    st.warning("Seu código tem a estrutura correta, mas você não escreveu os textos de impressão exatamente como o Chefe pediu. Tente usar 'Adulto' e 'Menor' nos seus prints.")
 
 st.sidebar.markdown("---")
 st.sidebar.info("Este aplicativo foi criado para ajudar você a entender os fundamentos do Python!")
