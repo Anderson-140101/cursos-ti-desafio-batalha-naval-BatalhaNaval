@@ -5,7 +5,16 @@ st.set_page_config(page_title="Curso de Python Básico", page_icon="🐍", layou
 st.sidebar.title("🐍 Curso de Python Básico")
 st.sidebar.markdown("Aprenda os conceitos básicos do Python passo a passo!")
 
-menu = ["1. Introdução", "2. Variáveis", "3. Sinais e Operadores", "4. Aspas (Strings)", "5. Parênteses, Colchetes e Chaves"]
+menu = [
+    "1. Introdução",
+    "2. Variáveis",
+    "3. Sinais e Operadores",
+    "4. Aspas (Strings)",
+    "5. Parênteses, Colchetes e Chaves",
+    "6. Tomando Decisões (If/Else)",
+    "7. Repetições (For e While)",
+    "8. Funções (def)"
+]
 escolha = st.sidebar.radio("Navegação:", menu)
 
 st.title("Bem-vindo ao Curso de Python! 🚀")
@@ -141,6 +150,135 @@ pessoa = {
 
 print(pessoa["nome"]) # Mostra "Carlos"
     ''', language='python')
+
+elif escolha == "6. Tomando Decisões (If/Else)":
+    st.header("6. Ensinando o Computador a Tomar Decisões")
+    st.write('''
+    Até agora, nossos códigos rodavam direto, do começo ao fim. Mas e se a gente quiser que o código faça algo **apenas SE** uma condição for verdadeira?
+    É aí que entram o **If** (Se), o **Else** (Se não) e o **Elif** (Se não, se).
+    ''')
+
+    st.subheader("O comando If e Else")
+    st.write("Imagine que você está programando a entrada de um cinema. A pessoa só pode entrar se for maior de idade.")
+    st.code('''
+idade = 20
+
+if idade >= 18:
+    print("Você pode entrar no cinema!")
+else:
+    print("Você não pode entrar, volte para casa.")
+    ''', language='python')
+
+    st.warning('''
+    ⚠️ **ATENÇÃO À IDENTAÇÃO (Os espaços antes do código):**
+    Olhe para o código acima. Percebeu que o `print` não está colado no canto esquerdo? Ele tem uns espaços antes.
+
+    No Python, **esses espaços (geralmente 4 espaços ou 1 'Tab') são obrigatórios!**
+    Eles avisam ao Python: *"Ei, esse comando print faz parte do bloco If"*. Se você não colocar os espaços, o código vai dar erro.
+    Outra coisa muito importante: Repare no sinal de dois pontos `:` no final do `if` e do `else`. Não esqueça deles!
+    ''')
+
+    st.subheader("Usando o Elif (Para mais de duas opções)")
+    st.write("E se a gente tiver 3 regras? Por exemplo, um sinaleiro/semáforo:")
+    st.code('''
+cor = "Amarelo"
+
+if cor == "Verde":
+    print("Pode passar!")
+elif cor == "Amarelo":
+    print("Atenção, diminua a velocidade.")
+else:
+    print("Pare imediatamente!")
+    ''', language='python')
+
+elif escolha == "7. Repetições (For e While)":
+    st.header("7. Laços de Repetição (Loops)")
+    st.write('''
+    Imagine que você precisa escrever "Bom dia!" na tela 100 vezes.
+    Você copiaria e colaria o comando `print` 100 vezes? Claro que não!
+    Para isso usamos os **Laços de Repetição**, também chamados de *Loops*.
+    ''')
+
+    st.subheader("1. O comando `for` (Para)")
+    st.write("Usamos o `for` quando sabemos exatamente quantas vezes queremos repetir ou quando queremos percorrer uma Lista.")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("**Contando de 0 a 4:**")
+        st.code('''
+# range(5) significa "repita 5 vezes" (0, 1, 2, 3, 4)
+for numero in range(5):
+    print(numero)
+        ''', language='python')
+
+    with col2:
+        st.markdown("**Percorrendo uma lista:**")
+        st.code('''
+frutas = ["Maçã", "Banana", "Uva"]
+
+for fruta in frutas:
+    print("Eu gosto de " + fruta)
+        ''', language='python')
+
+    st.subheader("2. O comando `while` (Enquanto)")
+    st.write('''
+    Usamos o `while` quando **NÃO** sabemos quantas vezes o código vai repetir, mas queremos que ele continue repetindo **ENQUANTO** uma condição for verdadeira.
+    ''')
+    st.code('''
+contador = 1
+
+while contador <= 3:
+    print("Contagem: ", contador)
+    contador = contador + 1 # Aumenta 1 para não rodar para sempre!
+
+print("Fim da contagem!")
+    ''', language='python')
+
+    st.error('''
+    🛑 **Cuidado com o Loop Infinito!**
+    Se no código acima a gente esquecesse a linha `contador = contador + 1`, a condição seria sempre verdadeira (1 sempre será menor que 3), e o computador ficaria escrevendo "Contagem: 1" para sempre até travar!
+    ''')
+
+elif escolha == "8. Funções (def)":
+    st.header("8. Criando suas próprias Funções (`def`)")
+    st.write('''
+    Até agora, usamos funções que já vieram prontas no Python, como o `print()`.
+    Mas você também pode **criar os seus próprios comandos (funções)**!
+    Isso é ótimo para não ter que repetir o mesmo código várias vezes.
+    ''')
+
+    st.subheader("Como criar uma função?")
+    st.write("Usamos a palavra-chave `def` (de *define*). Vamos criar uma função que dá bom dia:")
+    st.code('''
+# 1. CRIANDO A FUNÇÃO (Ela não faz nada até ser chamada)
+def dar_bom_dia():
+    print("Bom dia! Seja muito bem-vindo ao sistema!")
+    print("------------------------------------------")
+
+# 2. USANDO A FUNÇÃO
+dar_bom_dia()
+dar_bom_dia() # Posso usar quantas vezes quiser!
+    ''', language='python')
+
+    st.subheader("Funções que recebem informações (Parâmetros)")
+    st.write('''
+    As funções podem receber informações dentro dos parênteses `( )` para ficarem mais inteligentes.
+    Vamos criar uma função que soma dois números:
+    ''')
+    st.code('''
+def somar(numero1, numero2):
+    resultado = numero1 + numero2
+    print("A soma deu:", resultado)
+
+somar(10, 5)   # Vai mostrar "A soma deu: 15"
+somar(50, 50)  # Vai mostrar "A soma deu: 100"
+    ''', language='python')
+
+    st.success('''
+    ✅ **Parabéns!**
+    Com as Funções, você acaba de concluir a base essencial da programação em Python.
+    Você já tem o conhecimento necessário para começar a criar os seus próprios projetinhos!
+    ''')
 
 st.sidebar.markdown("---")
 st.sidebar.info("Este aplicativo foi criado para ajudar você a entender os fundamentos do Python!")
