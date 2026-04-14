@@ -32,6 +32,14 @@ if escolha == "1. Introdução":
     st.write("Usamos a função `print()` para escrever algo na tela do computador.")
     st.code('print("Olá, Mundo!")', language='python')
 
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q1 = st.radio("Qual comando usamos para escrever algo na tela no Python?", ("mostrar()", "print()", "escrever()", "tela()"), index=None)
+    if q1 == "print()":
+        st.success("Exato! Você aprendeu a primeira função do Python.")
+    elif q1 != None:
+        st.error("Ops! Tente novamente. Lembre-se do inglês para 'imprimir'.")
+
 elif escolha == "2. Variáveis":
     st.header("2. O que são Variáveis?")
     st.write('''
@@ -56,6 +64,14 @@ print(idade)
     - Não podem começar com números.
     - Não use acentos ou cedilha (preferencialmente).
     ''')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q2 = st.radio("Qual das opções abaixo é um nome VÁLIDO para uma variável no Python?", ("1_nome", "nome completo", "nome_completo", "nome-completo"), index=None)
+    if q2 == "nome_completo":
+        st.success("Correto! Não podemos usar espaços, traços ou começar com números.")
+    elif q2 != None:
+        st.error("Incorreto! Reveja a caixinha amarela de 'Regras'.")
 
 elif escolha == "3. Sinais e Operadores":
     st.header("3. Sinais e Operadores Matemáticos")
@@ -91,6 +107,14 @@ print(10 == 10)  # True (10 é igual a 10)
 print(5 > 10)    # False (5 não é maior que 10)
         ''', language='python')
 
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q3 = st.radio("Qual a diferença entre `=` e `==` no Python?", ("São a mesma coisa.", "`=` guarda um valor e `==` compara se duas coisas são iguais.", "`==` guarda um valor e `=` compara.", "Nenhuma das anteriores."), index=None)
+    if q3 == "`=` guarda um valor e `==` compara se duas coisas são iguais.":
+        st.success("Perfeito! Um `=` é atribuição, dois `==` é comparação.")
+    elif q3 != None:
+        st.error("Quase lá! Leia novamente a sessão de Operadores de Comparação.")
+
 elif escolha == "4. Aspas (Strings)":
     st.header("4. Onde colocar as Aspas?")
     st.write('''
@@ -116,6 +140,14 @@ Basta colocar entre três aspas.
 """
 print(texto_longo)
     ''', language='python')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q4 = st.radio("Para que servem as 3 aspas (''' ou \"\"\")?", ("Para destacar um texto.", "Para textos curtos.", "Para textos longos que pulam linhas.", "Para fazer contas."), index=None)
+    if q4 == "Para textos longos que pulam linhas.":
+        st.success("Exatamente! Elas permitem a quebra de linha natural (multi-line).")
+    elif q4 != None:
+        st.error("Ainda não. Tente a opção que fala sobre pular linhas.")
 
 elif escolha == "5. Parênteses, Colchetes e Chaves":
     st.header("5. Sinais Especiais: (), [], {}")
@@ -151,6 +183,14 @@ pessoa = {
 
 print(pessoa["nome"]) # Mostra "Carlos"
     ''', language='python')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q5 = st.radio("Qual sinal usamos para criar uma **Lista** que guarda vários itens (como frutas)?", ("Parênteses ( )", "Colchetes [ ]", "Chaves { }", "Aspas \" \""), index=None)
+    if q5 == "Colchetes [ ]":
+        st.success("Muito bem! Colchetes são usados para listas.")
+    elif q5 != None:
+        st.error("Ops! Dê uma olhada novamente na seção 2.")
 
 elif escolha == "6. Tomando Decisões (If/Else)":
     st.header("6. Ensinando o Computador a Tomar Decisões")
@@ -191,6 +231,14 @@ elif cor == "Amarelo":
 else:
     print("Pare imediatamente!")
     ''', language='python')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q6 = st.radio("Por que os espaços (identação) antes do `print` dentro do `if` são importantes?", ("Apenas por estética.", "Para o código ficar colorido.", "Eles são obrigatórios para dizer ao Python que aquele comando faz parte do If.", "Não são importantes, o código roda sem eles."), index=None)
+    if q6 == "Eles são obrigatórios para dizer ao Python que aquele comando faz parte do If.":
+        st.success("Acertou em cheio! A identação é o que define os blocos de código no Python.")
+    elif q6 != None:
+        st.error("Cuidado! Leia a caixa amarela de atenção sobre a Identação.")
 
 elif escolha == "7. Repetições (For e While)":
     st.header("7. Laços de Repetição (Loops)")
@@ -240,6 +288,14 @@ print("Fim da contagem!")
     Se no código acima a gente esquecesse a linha `contador = contador + 1`, a condição seria sempre verdadeira (1 sempre será menor que 3), e o computador ficaria escrevendo "Contagem: 1" para sempre até travar!
     ''')
 
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q7 = st.radio("O que acontece se esquecermos de atualizar a condição dentro de um `while`?", ("Ele roda uma vez e para.", "Ele causa um Loop Infinito, travando o programa.", "Ele pula para a próxima linha.", "O Python corrige sozinho."), index=None)
+    if q7 == "Ele causa um Loop Infinito, travando o programa.":
+        st.success("Exatamente! É o pesadelo de todo programador! 😅")
+    elif q7 != None:
+        st.error("Erro. Lembre-se do aviso vermelho no final da lição!")
+
 elif escolha == "8. Funções (def)":
     st.header("8. Criando suas próprias Funções (`def`)")
     st.write('''
@@ -280,6 +336,14 @@ somar(50, 50)  # Vai mostrar "A soma deu: 100"
     Com as Funções, você acaba de concluir a base essencial da programação em Python.
     Você já tem o conhecimento necessário para começar a criar os seus próprios projetinhos!
     ''')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Rápido!")
+    q8 = st.radio("Qual palavra usamos para começar a criar nossa própria função no Python?", ("function", "criar", "def", "fun"), index=None)
+    if q8 == "def":
+        st.success("Correto! `def` vem de 'define' (definir função).")
+    elif q8 != None:
+        st.error("Tente de novo! Olha o código de exemplo lá em cima.")
 
 elif escolha == "9. Tratamento de Erros (Try/Except)":
     st.header("9. Tratamento de Erros (`try` e `except`)")
@@ -322,6 +386,15 @@ except ValueError:
     ''', language='python')
 
     st.info("💡 **Dica de Ouro:** Usar `try` e `except` é o que diferencia um programa amador (que trava o tempo todo) de um programa profissional e seguro!")
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Final!")
+    q9 = st.radio("Para que serve o bloco `except`?", ("Para tentar executar um código perigoso.", "Para executar algo SOMENTE quando um erro acontecer, evitando que o programa feche.", "Para encerrar o programa de propósito.", "Para acelerar o código."), index=None)
+    if q9 == "Para executar algo SOMENTE quando um erro acontecer, evitando que o programa feche.":
+        st.success("Você acertou! Ele é a 'rede de segurança' do seu programa! 🎉")
+        st.balloons()
+    elif q9 != None:
+        st.error("Pense um pouco mais na tradução de 'Exceto' (se der erro).")
 
 st.sidebar.markdown("---")
 st.sidebar.info("Este aplicativo foi criado para ajudar você a entender os fundamentos do Python!")
