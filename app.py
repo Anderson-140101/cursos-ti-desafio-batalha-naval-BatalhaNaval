@@ -3,24 +3,38 @@ import streamlit as st
 st.set_page_config(page_title="Curso de Python Básico", page_icon="🐍", layout="wide")
 
 st.sidebar.title("🐍 Curso de Python Básico")
-st.sidebar.markdown("Aprenda os conceitos básicos do Python passo a passo!")
+st.sidebar.markdown("Do absoluto zero até a criação de Inteligências Artificiais!")
 
-menu = [
-    "1. Introdução",
-    "2. Variáveis",
-    "3. Sinais e Operadores",
-    "4. Aspas (Strings)",
-    "5. Parênteses, Colchetes e Chaves",
-    "6. Tomando Decisões (If/Else)",
-    "7. Repetições (For e While)",
-    "8. Funções (def)",
-    "9. Tratamento de Erros (Try/Except)",
-    "10. Módulos e Bibliotecas (Import)",
-    "11. Projeto Final: Estágio (Ao Vivo!)"
-]
-escolha = st.sidebar.radio("Navegação:", menu)
+modulo_escolhido = st.sidebar.selectbox(
+    "📚 Escolha o Módulo do Curso:",
+    ["📘 Módulo 1: Python Básico", "🚀 Módulo 2: Python A Evolução"]
+)
 
-st.title("Bem-vindo ao Curso de Python! 🚀")
+if modulo_escolhido == "📘 Módulo 1: Python Básico":
+    menu = [
+        "1. Introdução",
+        "2. Variáveis",
+        "3. Sinais e Operadores",
+        "4. Aspas (Strings)",
+        "5. Parênteses, Colchetes e Chaves",
+        "6. Tomando Decisões (If/Else)",
+        "7. Repetições (For e While)",
+        "8. Funções (def)",
+        "9. Tratamento de Erros (Try/Except)",
+        "10. Módulos e Bibliotecas (Import)",
+        "11. Projeto Final: Estágio (Ao Vivo!)"
+    ]
+    escolha = st.sidebar.radio("Navegação:", menu)
+else:
+    menu = [
+        "Aula 1: Python Power Up",
+        "Aula 2: Python Insights",
+        "Aula 3: Python IA",
+        "Aula 4: Python Dev"
+    ]
+    escolha = st.sidebar.radio("Aulas Avançadas:", menu)
+
+st.title("Bem-vindo à Formação em Python! 🐍🚀")
 
 if escolha == "1. Introdução":
     st.header("1. Introdução ao Python")
@@ -505,5 +519,194 @@ Cliente Adulto
                 else:
                     st.warning("Seu código tem a estrutura correta, mas você não escreveu os textos de impressão exatamente como o Chefe pediu. Tente usar 'Adulto' e 'Menor' nos seus prints.")
 
+
+elif escolha == "Aula 1: Python Power Up":
+    st.header("⚡ Aula 1 - Python Power Up")
+    st.write("Bem-vindo à primeira aula da **Evolução Python**. Hoje você deixará de ser um 'digitador de código' para se tornar um **Criador de Robôs**.")
+
+    st.subheader("a. Automação de Tarefas")
+    st.write('''
+    Sabe aquela tarefa chata e repetitiva que você faz no trabalho? Preencher planilhas, baixar relatórios, enviar e-mails todo dia no mesmo horário?
+    O Python consegue assumir o controle do seu computador e fazer isso para você em segundos. Chamamos isso de **RPA (Robotic Process Automation)**.
+    ''')
+
+    st.subheader("b. Criação de Bots & c. Controle de Mouse e Teclado")
+    st.write("Para criar nosso primeiro Bot, usamos uma biblioteca superpoderosa chamada **`pyautogui`**. Ela simula um ser humano controlando o computador.")
+    st.markdown('''
+    - `pyautogui.click()`: Clica na tela.
+    - `pyautogui.write('texto')`: Digita no teclado.
+    - `pyautogui.press('enter')`: Aperta uma tecla.
+    ''')
+
+    st.subheader("d. Seu 1º projeto em Python partindo do zero")
+    st.write("Vamos criar um Bot que abre o Bloco de Notas sozinho, digita uma mensagem e salva o arquivo.")
+    st.code('''
+# Passo 1: Instale a biblioteca (No terminal: pip install pyautogui)
+import pyautogui
+import time
+
+# Passo 2: Damos uma pausa de 2 segundos para dar tempo de olhar a tela
+time.sleep(2)
+
+# Passo 3: O Bot aperta a tecla do Windows e pesquisa o bloco de notas
+pyautogui.press("win")
+time.sleep(1)
+pyautogui.write("bloco de notas")
+pyautogui.press("enter")
+time.sleep(2)
+
+# Passo 4: O Bot escreve a mensagem como se fosse você digitando!
+pyautogui.write("Ola chefe! Eu sou um robo criado em Python e ja terminei o relatorio.")
+
+# Passo 5: Salvar o arquivo
+pyautogui.hotkey("ctrl", "s") # Aperta duas teclas juntas
+time.sleep(1)
+pyautogui.write("relatorio_bot")
+pyautogui.press("enter")
+    ''', language='python')
+
+    st.info("⚠️ **Dica Importante:** Para parar um bot descontrolado do PyAutoGUI, arraste o seu mouse com força para qualquer um dos 4 cantos extremos da sua tela (Fail-Safe)!")
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Power Up")
+    qa1 = st.radio("Se eu quiser que o meu Bot aperte a tecla 'Espaço' do meu teclado, qual comando do PyAutoGUI eu uso?", ("pyautogui.click('espaço')", "pyautogui.press('space')", "pyautogui.write('espaço')", "pyautogui.botao('space')"), index=None)
+    if qa1 == "pyautogui.press('space')":
+        st.success("Perfeito! `press()` é usado para apertar teclas específicas!")
+    elif qa1 != None:
+        st.error("Tente de novo! Lembre-se do inglês para 'Pressionar' uma tecla.")
+
+
+elif escolha == "Aula 2: Python Insights":
+    st.header("📊 Aula 2 - Python Insights")
+    st.write("Hoje você vai aprender por que as empresas amam tanto o Python. Vamos transformar dados puros em **Ouro (Informação de valor)** usando Análise de Dados e Inteligência de Negócios.")
+
+    st.subheader("a. Análise de Dados e c. Tratamento de Dados")
+    st.write('''
+    No mercado de trabalho, você não vai analisar 5 clientes no olho, vai analisar planilhas com 5 milhões de linhas!
+    Para isso usamos a biblioteca **`pandas`**. Ela funciona como um 'Excel com super poderes'. O tratamento de dados envolve ler essa planilha e remover valores vazios, erros ou dados duplicados antes de analisar.
+    ''')
+    st.code('''
+import pandas as pd
+
+# 1. Lê uma base de dados inteira em 1 segundo
+tabela = pd.read_csv("vendas_empresa.csv")
+
+# 2. Tratamento: Joga fora linhas vazias (limpeza)
+tabela = tabela.dropna()
+
+# 3. Análise: Quanto a empresa faturou por loja?
+faturamento = tabela.groupby('Loja')['Valor Final'].sum()
+print(faturamento)
+    ''', language='python')
+
+    st.subheader("b. Gráficos e Dashboards & d. Relatórios que Impressionam")
+    st.write("De nada adianta descobrir os dados se o seu chefe não entender nada. Você precisa apresentar visualmente! Para gerar relatórios e Dashboards (painéis interativos) que impressionam, usamos o próprio `streamlit` com o Pandas!")
+
+    # Gerando um gráfico real na tela do usuário
+    st.write("Veja este exemplo **REAL** gerado agora mesmo pelo seu aplicativo:")
+    import pandas as pd
+    import numpy as np
+
+    # Criando dados falsos para demonstração
+    dados_grafico = pd.DataFrame({
+        "Meses": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+        "Vendas": [1500, 2200, 1800, 3100, 4500, 5200]
+    })
+
+    st.bar_chart(dados_grafico, x="Meses", y="Vendas", color="#1f77b4")
+    st.caption("Gráfico: Faturamento do 1º Semestre")
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Insights")
+    qa2 = st.radio("Qual é a principal biblioteca do Python para trabalhar com grande quantidade de dados e tabelas (O 'Excel do Python')?", ("pyautogui", "streamlit", "pandas", "math"), index=None)
+    if qa2 == "pandas":
+        st.success("Exatamente! O Pandas é o rei dos dados no Python!")
+    elif qa2 != None:
+        st.error("Ops! Dê uma lida novamente na sessão 'Análise de Dados'!")
+
+elif escolha == "Aula 3: Python IA":
+    st.header("🤖 Aula 3 - Python IA")
+    st.write("Chegamos ao topo da tecnologia atual! O Python é a principal linguagem do mundo para criar Inteligências Artificiais, como o ChatGPT, geradores de imagens e sistemas de previsão.")
+
+    st.subheader("a. Criação de Inteligência Artificial e b. Previsões")
+    st.write('''
+    A Inteligência Artificial (IA) em Python geralmente usa um ramo chamado **Machine Learning (Aprendizado de Máquina)**.
+    A ideia é simples: em vez de você escrever o código com as regras (os `Ifs` e `Elses`), você passa **Dados Históricos** para o Python e ele aprende as regras sozinho!
+    ''')
+
+    st.info("💡 **Exemplo prático:** Você dá para a IA os dados de 1.000 clientes (idade, salário, se comprou ou não). A IA estuda isso e consegue **prever** se o cliente de número 1.001 vai comprar o seu produto ou não!")
+
+    st.write("Uma das bibliotecas mais usadas para previsões e machine learning é a `scikit-learn`.")
+    st.code('''
+from sklearn.ensemble import RandomForestClassifier
+
+# 1. Cria a Inteligência Artificial (O cérebro)
+ia = RandomForestClassifier()
+
+# 2. Treina a IA com os dados históricos que você tem
+ia.fit(dados_dos_clientes, compras_passadas)
+
+# 3. Faz a previsão do futuro!
+previsao = ia.predict(novo_cliente)
+print(previsao)
+    ''', language='python')
+
+    st.subheader("c. A Nova Onda do Mercado de Trabalho")
+    st.write('''
+    O mundo mudou. Profissionais que apenas "usam" o computador estão sendo substituídos. Profissionais que **criam soluções e controlam IAs** estão sendo os mais disputados e bem pagos do mercado!
+    Entender de Python, Machine Learning e automação é o seu "passaporte" para não ficar obsoleto nessa nova onda tecnológica.
+    ''')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz IA")
+    qa3 = st.radio("Como a maioria das Inteligências Artificiais no Python (Machine Learning) aprendem a fazer previsões?", ("O programador escreve milhares de regras no If e Else.", "A IA estuda um grande volume de Dados Históricos e aprende os padrões sozinha.", "A IA pesquisa no Google a resposta no momento da previsão.", "A IA adivinha chutando aleatoriamente."), index=None)
+    if qa3 == "A IA estuda um grande volume de Dados Históricos e aprende os padrões sozinha.":
+        st.success("Exato! Os dados são o 'combustível' que alimenta a Inteligência Artificial!")
+    elif qa3 != None:
+        st.error("Incorreto! Lembre-se, a IA moderna não usa regras manuais ou Google, ela usa Aprendizado de Máquina.")
+
+elif escolha == "Aula 4: Python Dev":
+    st.header("🌐 Aula 4 - Python Dev (Web & Apps)")
+    st.write("A área de Desenvolvimento ('Dev') é focada em criar produtos digitais! O Python é muito famoso no backend (a parte invisível do servidor que faz as contas e salva os dados) usando ferramentas como **Django** e **Flask**.")
+
+    st.subheader("a. Criação de Sites e Apps")
+    st.write('''
+    Hoje em dia, criar aplicativos e sites não exige que você saiba 5 linguagens de programação diferentes.
+    Linguagens como o Python evoluíram tanto que você pode usar *Frameworks* (caixas de ferramentas de desenvolvimento) que cuidam de toda a lógica do servidor para você.
+
+    Tudo o que você viu neste curso foi criado 100% em Python com o Framework **Streamlit**! Nós criamos menus, textos, botões e até gráficos sem escrever uma única linha de HTML ou CSS.
+    ''')
+
+    st.subheader("b. Desenvolvimento de um Chat ao Vivo")
+    st.write("Sabe o WhatsApp, Discord ou Chat de Suporte? Eles utilizam estruturas que mantêm o Histórico e enviam novas mensagens instantaneamente. Veja a lógica básica de como se programa o cérebro de um Chat em Python:")
+    st.code('''
+# 1. O servidor guarda o histórico de mensagens (numa Lista)
+historico_chat = []
+
+# 2. Quando um usuário digita algo e clica em enviar (Função)
+def enviar_mensagem(nome_usuario, texto_mensagem):
+    # Formata a mensagem
+    nova_mensagem = nome_usuario + " disse: " + texto_mensagem
+
+    # Salva no Histórico do servidor
+    historico_chat.append(nova_mensagem)
+
+    # Atualiza a tela de todo mundo mostrando a mensagem nova
+    print(nova_mensagem)
+
+# 3. Simulando a conversa:
+enviar_mensagem("Carlos", "Olá, alguém aí?")
+enviar_mensagem("Maria", "Oi Carlos! Tudo bem?")
+    ''', language='python')
+
+    st.markdown("---")
+    st.subheader("🧠 Quiz Final Dev")
+    qa4 = st.radio("Qual o papel principal do Python na construção tradicional de sites e aplicativos complexos?", ("O Python cria as cores, fontes e animações bonitas da página.", "O Python roda no Back-End, cuidando das regras de negócio, cálculos e conexão com banco de dados.", "O Python fabrica as peças de hardware do celular.", "Nenhuma das alternativas."), index=None)
+    if qa4 == "O Python roda no Back-End, cuidando das regras de negócio, cálculos e conexão com banco de dados.":
+        st.success("Exatamente! Ele é o 'Cérebro' ou 'Motor' invisível dos grandes sites. Você concluiu a Evolução! 🎈🎉")
+        st.balloons()
+    elif qa4 != None:
+        st.error("Ops! Tente novamente. Lembre-se do papel do Python no servidor (backend).")
+
 st.sidebar.markdown("---")
-st.sidebar.info("Este aplicativo foi criado para ajudar você a entender os fundamentos do Python!")
+st.sidebar.info("Desenvolvido para transformar você em um Programador Profissional!")
