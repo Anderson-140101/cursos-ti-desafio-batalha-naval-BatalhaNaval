@@ -20,21 +20,53 @@ int main() {
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
     // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
+    // Declaração das matrizes para as habilidades
+    int cone[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1}
+    };
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
+    int octaedro[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    int cruz[3][5] = {
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 1, 0, 0}
+    };
+
+    // Exibição da habilidade Cone
+    printf("Habilidade em Cone:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", cone[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    // Exibição da habilidade Octaedro
+    printf("Habilidade em Octaedro:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", octaedro[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    // Exibição da habilidade Cruz
+    printf("Habilidade em Cruz:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", cruz[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
