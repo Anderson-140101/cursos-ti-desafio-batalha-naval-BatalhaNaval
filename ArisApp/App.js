@@ -1,13 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Alert, Linking, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Linking, ScrollView, TextInput, ActivityIndicator } from 'react-native';
+import { useState } from 'react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+// ATENÇÃO: Substitua 'SUA_CHAVE_API_AQUI' pela sua chave de API real do Google Gemini.
+// Em um aplicativo real em produção, NUNCA deixe a chave da API exposta no código.
+const GEMINI_API_KEY = 'SUA_CHAVE_API_AQUI';
 
 export default function App() {
   const agentName = 'Aris';
 
+  const [prompt, setPrompt] = useState('');
+  const [resposta, setResposta] = useState('Me pergunte qualquer coisa!');
+  const [carregando, setCarregando] = useState(false);
+
+  // Função para falar com o Gemini
+  const falarComAris = async () => {
+    if (!prompt.trim()) return;
+
+    if (GEMINI_API_KEY === 'SUA_CHAVE_API_AQUI') {
+        Alert.alert("Chave API Faltando", "Você precisa colocar a sua chave de API do Gemini no código (App.js) para a inteligência artificial funcionar.");
+        return;
+    }
+
+    setCarregando(true);
+    setResposta('Pensando...');
+
+    try {
+      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+      // Usando o modelo gemini-pro (ou gemini-1.5-flash) que é ideal para texto
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+      const instrucaoSistema = `Você é um assistente virtual pessoal chamado ${agentName}. Você é prestativo, educado e fala português. Responda de forma concisa como um assistente de celular.`;
+
+      const result = await model.generateContent(`${instrucaoSistema}\n\nUsuário: ${prompt}`);
+      const response = await result.response;
+      const texto = response.text();
+
+      setResposta(texto);
+    } catch (error) {
+      console.error(error);
+      setResposta('Desculpe, ocorreu um erro ao me conectar com meu cérebro (Gemini).');
+    } finally {
+      setCarregando(false);
+      setPrompt('');
+    }
+  };
+
   // Funções de simulação para integrações nativas
   const handleCalendar = () => {
     Alert.alert(`${agentName}`, 'Acessando calendário... Hoje você não tem compromissos urgentes.');
-    // No futuro, isso usaria react-native-calendar-events
   };
 
   const handleEmail = () => {
@@ -17,7 +59,6 @@ export default function App() {
 
   const handleDrive = () => {
     Alert.alert(`${agentName}`, 'Redirecionando para o Google Drive...');
-    // Exemplo de deeplink, pode requerer configuração adicional no aparelho
     Linking.openURL('googledrive://').catch(() => {
         Alert.alert('Erro', 'Google Drive não está instalado.');
     });
@@ -25,26 +66,36 @@ export default function App() {
 
   const handleScan = () => {
     Alert.alert(`${agentName}`, 'Iniciando câmera para escanear documento e salvar no Drive...');
-    // No futuro, usaria expo-camera e api do google drive
   };
 
   const handleCall = () => {
     Alert.alert(`${agentName}`, 'Iniciando chamada...');
-    Linking.openURL('tel:123456789'); // Exemplo de deeplink para telefone
-  };
-
-  const handleListen = () => {
-    Alert.alert(`${agentName}`, 'Escutando... (Simulando reconhecimento de voz "Ok Aris")');
-    // No futuro, usaria @react-native-voice/voice ou similar para detecção contínua
+    Linking.openURL('tel:123456789');
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>🤖 Olá, eu sou {agentName}!</Text>
-      <Text style={styles.subtitle}>Seu assistente pessoal para celular.</Text>
+      <Text style={styles.title}>🤖 Olá, eu sou o {agentName}!</Text>
 
-      <View style={styles.buttonContainer}>
-        <Button title="Simular Wake Word (Falar 'Aris')" onPress={handleListen} color="#4CAF50" />
+      {/* Área do Chat com o Gemini */}
+      <View style={styles.chatContainer}>
+        <Text style={styles.respostaAris}>{resposta}</Text>
+
+        {carregando && <ActivityIndicator size="large" color="#0000ff" style={{marginVertical: 10}} />}
+
+        <TextInput
+          style={styles.input}
+          placeholder="Fale com o Aris..."
+          value={prompt}
+          onChangeText={setPrompt}
+          multiline
+        />
+        <Button
+            title="Enviar mensagem"
+            onPress={falarComAris}
+            color="#2196F3"
+            disabled={carregando}
+        />
       </View>
 
       <Text style={styles.sectionTitle}>Comandos Simulados:</Text>
@@ -77,28 +128,41 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: 80,
+    paddingTop: 60,
     paddingHorizontal: 20,
+    paddingBottom: 40
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
   },
-  subtitle: {
+  chatContainer: {
+    width: '100%',
+    backgroundColor: '#f5f5f5',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 30,
+    minHeight: 200,
+  },
+  respostaAris: {
     fontSize: 16,
-    color: '#666',
-    marginBottom: 40,
-    textAlign: 'center',
+    color: '#333',
+    marginBottom: 20,
+    fontStyle: 'italic',
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    minHeight: 50,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
-    marginTop: 30,
-    marginBottom: 20,
-  },
-  buttonContainer: {
-    width: '100%',
     marginBottom: 20,
   },
   grid: {
