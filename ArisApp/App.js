@@ -28,8 +28,8 @@ export default function App() {
 
     try {
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-      // Usando o modelo gemini-pro (ou gemini-1.5-flash) que é ideal para texto
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      // Usando o modelo gemini-1.5-pro conforme solicitado pelo usuário
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
       const instrucaoSistema = `Você é um assistente virtual pessoal chamado ${agentName}. Você é prestativo, educado e fala português. Responda de forma concisa como um assistente de celular.`;
 
