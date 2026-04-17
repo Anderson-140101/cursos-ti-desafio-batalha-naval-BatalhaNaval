@@ -9,6 +9,28 @@ int main() {
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    int tabuleiro[5][5] = {0}; // Inicializando tabuleiro vazio (0)
+
+    // Posicionando navio horizontalmente (tamanho 3) na linha 1, colunas 0, 1, 2
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[1][i] = 3; // 3 indica parte do navio
+    }
+
+    // Posicionando navio verticalmente (tamanho 3) na coluna 4, linhas 2, 3, 4
+    for (int i = 2; i < 5; i++) {
+        tabuleiro[i][4] = 3;
+    }
+
+    printf("Coordenadas do Navio Horizontal:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Linha %d, Coluna %d\n", 1, i);
+    }
+
+    printf("\nCoordenadas do Navio Vertical:\n");
+    for (int i = 2; i < 5; i++) {
+        printf("Linha %d, Coluna %d\n", i, 4);
+    }
+    printf("\n");
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
