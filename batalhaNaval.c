@@ -1,9 +1,138 @@
 #include <stdio.h>
+#include "batalhaNaval.h"
+
+void inicializarTabuleiro(int tabuleiro[BOARD_SIZE][BOARD_SIZE]) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            tabuleiro[i][j] = WATER;
+        }
+    }
+}
+
+int posicionarNavio(int tabuleiro[BOARD_SIZE][BOARD_SIZE], int linha, int coluna, int tamanho, int orientacao) {
+    // Verificar limites
+    for (int i = 0; i < tamanho; i++) {
+        int r = linha;
+        int c = coluna;
+
+        if (orientacao == 0) { // Horizontal
+            c += i;
+        } else if (orientacao == 1) { // Vertical
+            r += i;
+        } else if (orientacao == 2) { // Diagonal right-down
+            r += i;
+            c += i;
+        } else if (orientacao == 3) { // Diagonal left-down
+            r += i;
+            c -= i;
+        } else {
+            return 0; // Orientacao invalida
+        }
+
+        if (r < 0 || r >= BOARD_SIZE || c < 0 || c >= BOARD_SIZE) {
+            return 0; // Fora dos limites
+        }
+    }
+
+    // Posicionar
+    for (int i = 0; i < tamanho; i++) {
+        int r = linha;
+        int c = coluna;
+
+        if (orientacao == 0) { // Horizontal
+            c += i;
+        } else if (orientacao == 1) { // Vertical
+            r += i;
+        } else if (orientacao == 2) { // Diagonal right-down
+            r += i;
+            c += i;
+        } else if (orientacao == 3) { // Diagonal left-down
+            r += i;
+            c -= i;
+        }
+
+        tabuleiro[r][c] = SHIP;
+    }
+
+    return 1;
+}
+
+int aplicarHabilidade(int tabuleiro[BOARD_SIZE][BOARD_SIZE], int linha, int coluna, int tipo_habilidade) {
+    if (linha < 0 || linha >= BOARD_SIZE || coluna < 0 || coluna >= BOARD_SIZE) {
+        return 0;
+    }
+
+    if (tipo_habilidade == 0) { // Cone
+        // 0 0 1 0 0
+        // 0 1 1 1 0
+        // 1 1 1 1 1
+        int matriz[3][5] = {
+            {0, 0, 1, 0, 0},
+            {0, 1, 1, 1, 0},
+            {1, 1, 1, 1, 1}
+        };
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (matriz[i][j] == 1) {
+                    int r = linha + i - 0; // -0 to make tip at the given (linha, coluna)? Actually let's assume the center of the base or the tip. Let's make (linha, coluna) the tip. So the tip is at i=0, j=2.
+                    int c = coluna + j - 2;
+                    if (r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE) {
+                        tabuleiro[r][c] = ABILITY;
+                    }
+                }
+            }
+        }
+    } else if (tipo_habilidade == 1) { // Octaedro
+        // 0 0 1 0 0
+        // 0 1 1 1 0
+        // 0 0 1 0 0
+        int matriz[3][5] = {
+            {0, 0, 1, 0, 0},
+            {0, 1, 1, 1, 0},
+            {0, 0, 1, 0, 0}
+        };
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (matriz[i][j] == 1) {
+                    int r = linha + i - 1; // center is i=1, j=2
+                    int c = coluna + j - 2;
+                    if (r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE) {
+                        tabuleiro[r][c] = ABILITY;
+                    }
+                }
+            }
+        }
+    } else if (tipo_habilidade == 2) { // Cruz
+        // 0 0 1 0 0
+        // 1 1 1 1 1
+        // 0 0 1 0 0
+        int matriz[3][5] = {
+            {0, 0, 1, 0, 0},
+            {1, 1, 1, 1, 1},
+            {0, 0, 1, 0, 0}
+        };
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (matriz[i][j] == 1) {
+                    int r = linha + i - 1; // center is i=1, j=2
+                    int c = coluna + j - 2;
+                    if (r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE) {
+                        tabuleiro[r][c] = ABILITY;
+                    }
+                }
+            }
+        }
+    } else {
+        return 0; // Habilidade invalida
+    }
+    return 1;
+}
 
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
+#ifndef RUN_TESTS
 int main() {
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
@@ -38,3 +167,4 @@ int main() {
 
     return 0;
 }
+#endif
