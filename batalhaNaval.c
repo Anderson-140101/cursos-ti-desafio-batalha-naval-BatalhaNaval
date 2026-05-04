@@ -4,11 +4,52 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-int main() {
+// Helper functions for testing
+void inicializarTabuleiro(int tamanho, int tabuleiro[tamanho][tamanho]) {
+    for (int i = 0; i < tamanho; i++) {
+        for (int j = 0; j < tamanho; j++) {
+            tabuleiro[i][j] = 0;
+        }
+    }
+}
+
+void posicionarNavioHorizontal(int tamanho, int tabuleiro[tamanho][tamanho], int linha, int coluna, int tamanhoNavio) {
+    for (int j = 0; j < tamanhoNavio; j++) {
+        if (coluna + j < tamanho) {
+            tabuleiro[linha][coluna + j] = 3;
+        }
+    }
+}
+
+void posicionarNavioVertical(int tamanho, int tabuleiro[tamanho][tamanho], int linha, int coluna, int tamanhoNavio) {
+    for (int i = 0; i < tamanhoNavio; i++) {
+        if (linha + i < tamanho) {
+            tabuleiro[linha + i][coluna] = 3;
+        }
+    }
+}
+
+#ifndef RUN_TESTS
+int main(void) {
     // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    int tabuleiro[5][5];
+    inicializarTabuleiro(5, tabuleiro);
+
+    // Posiciona um navio horizontalmente na linha 1, coluna 1 com tamanho 3
+    posicionarNavioHorizontal(5, tabuleiro, 1, 1, 3);
+
+    // Posiciona um navio verticalmente na linha 0, coluna 4 com tamanho 2
+    posicionarNavioVertical(5, tabuleiro, 0, 4, 2);
+
+    // Exibição do nível novato
+    printf("Tabuleiro Nivel Novato:\n");
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
@@ -38,3 +79,4 @@ int main() {
 
     return 0;
 }
+#endif
